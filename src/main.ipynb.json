@@ -1,0 +1,901 @@
+{
+ "cells": [
+  {
+   "cell_type": "code",
+   "execution_count": 1,
+   "metadata": {},
+   "outputs": [
+    {
+     "name": "stdout",
+     "output_type": "stream",
+     "text": [
+      "1.12.0\n",
+      "2.1.6-tf\n"
+     ]
+    }
+   ],
+   "source": [
+    "import numpy as np\n",
+    "import pandas as pd\n",
+    "import tensorflow as tf\n",
+    "import matplotlib.pyplot as plt\n",
+    "\n",
+    "from tensorflow import keras\n",
+    "from sklearn.model_selection import train_test_split\n",
+    "\n",
+    "print(tf.__version__)\n",
+    "print(keras.__version__)"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 2,
+   "metadata": {},
+   "outputs": [
+    {
+     "name": "stdout",
+     "output_type": "stream",
+     "text": [
+      "Found GPU at: /device:GPU:0\n"
+     ]
+    }
+   ],
+   "source": [
+    "device_name = tf.test.gpu_device_name()\n",
+    "if device_name != '/device:GPU:0':\n",
+    "  raise SystemError('GPU device not found')\n",
+    "print('Found GPU at: {}'.format(device_name))"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 3,
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "import tensorflow.keras.applications.resnet50 as resnet50 \n",
+    "import tensorflow.keras.applications.vgg19 as vgg19\n",
+    "import tensorflow.keras.applications.densenet as densenet\n",
+    "import tensorflow.keras.applications.inception_v3 as inception_v3"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 4,
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "import tensorflow.keras.preprocessing.image as image\n",
+    "import tensorflow.keras.losses as losses\n",
+    "import tensorflow.keras.layers as layers\n",
+    "import tensorflow.keras.models as models\n",
+    "import tensorflow.keras.callbacks as callbacks"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "metadata": {},
+   "source": [
+    "# Dataset"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 5,
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "from scipy.io import loadmat\n",
+    "from os.path import join\n",
+    "\n",
+    "prefix = '../../Stanford_Dog_Breed'\n",
+    "imgfix = 'Images'\n",
+    "anofix = 'Annotation'"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": null,
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "# train = loadmat(join(prefix, 'train_list.mat'))\n",
+    "# test = loadmat(join(prefix, 'test_list.mat'))\n",
+    "\n",
+    "# L_annotation = L['annotation_list'];\n",
+    "# L_file = L['file_list'];\n",
+    "# L = L['labels'];\n",
+    "\n",
+    "# ftrain = train['file_list']\n",
+    "# ftest = test['file_list']\n",
+    "\n",
+    "# ltrain = train['labels']\n",
+    "# ltest = test['labels']\n",
+    "\n",
+    "# ntrain = ltrain.shape[0]\n",
+    "# ntest = ltest.shape[0]\n",
+    "\n",
+    "# print('Size of the training set:\\t', ntrain)\n",
+    "# print 'Size of the testing set: \\t', ntest"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 6,
+   "metadata": {},
+   "outputs": [
+    {
+     "name": "stdout",
+     "output_type": "stream",
+     "text": [
+      "Found 10080 images belonging to 120 classes.\n",
+      "Found 1920 images belonging to 120 classes.\n",
+      "Found 8580 images belonging to 120 classes.\n"
+     ]
+    }
+   ],
+   "source": [
+    "import tensorflow.keras.preprocessing.image as image\n",
+    "\n",
+    "ImgGen = image.ImageDataGenerator(preprocessing_function=inception_v3.preprocess_input, \n",
+    "                                  width_shift_range=0.2, \n",
+    "                                  height_shift_range=0.2, \n",
+    "                                  shear_range=0.2, \n",
+    "                                  zoom_range=0.2, \n",
+    "                                  horizontal_flip=True, \n",
+    "                                  validation_split=1/6.)\n",
+    "\n",
+    "Train = ImgGen.flow_from_directory(join(prefix, imgfix, 'Train'), \n",
+    "                                   target_size=(224, 224), \n",
+    "                                   class_mode='categorical', \n",
+    "                                   batch_size=32, \n",
+    "                                   shuffle=True, \n",
+    "                                   seed=None, \n",
+    "                                   subset='training', \n",
+    "                                   interpolation='nearest')\n",
+    "\n",
+    "Valid = ImgGen.flow_from_directory(join(prefix, imgfix, 'Train'), \n",
+    "                                   target_size=(224, 224), \n",
+    "                                   class_mode='categorical', \n",
+    "                                   batch_size=32, \n",
+    "                                   shuffle=True, \n",
+    "                                   seed=None, \n",
+    "                                   subset='validation', \n",
+    "                                   interpolation='nearest')\n",
+    "\n",
+    "\n",
+    "ImgTestGen = image.ImageDataGenerator(preprocessing_function=inception_v3.preprocess_input, validation_split=1/6.)\n",
+    "\n",
+    "Test  = ImgTestGen.flow_from_directory(join(prefix, imgfix, 'Test' ), \n",
+    "                                       target_size=(224, 224), \n",
+    "                                       class_mode='categorical', \n",
+    "                                       batch_size=32, \n",
+    "                                       shuffle=False, \n",
+    "                                       interpolation='nearest')\n",
+    "\n",
+    "\n",
+    "\n",
+    "\n",
+    "\n"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": null,
+   "metadata": {},
+   "outputs": [],
+   "source": []
+  },
+  {
+   "cell_type": "code",
+   "execution_count": null,
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "Test.class_indices"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "metadata": {},
+   "source": [
+    "## Catagory 2 Index Table"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "metadata": {},
+   "source": [
+    "DogBreed = {}\n",
+    "for i in range(1, ntest):\n",
+    "    l = ltest[i][0]\n",
+    "    c = ftest[i][0][0].split('/')[0]\n",
+    "    c = c.split('-')[1]\n",
+    "    if c not in DogBreed:\n",
+    "        DogBreed[c] = l - 1\n",
+    "        print c, l - 1\n"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "metadata": {},
+   "source": [
+    "def gen_path(idx):\n",
+    "    try:    path = join(prefix, imgfix, ftest[idx][0][0])\n",
+    "    except: path = join(prefix, imgfix, ftest[-1][0][0])      \n",
+    "    return  path"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "metadata": {},
+   "source": [
+    "def gen_labl(idx):\n",
+    "    try:    labl = ltest[idx][0]\n",
+    "    except: labl = ltest[-1][0]\n",
+    "    return  labl"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "metadata": {},
+   "source": [
+    "def get_imgs(idx):\n",
+    "    img = image.load_img(gen_path(idx), target_size=(224, 224))\n",
+    "    x = image.img_to_array(img)\n",
+    "    x = np.expand_dims(x, axis=0)\n",
+    "    \n",
+    "    return x"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "metadata": {},
+   "source": [
+    "# Models"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": null,
+   "metadata": {},
+   "outputs": [],
+   "source": []
+  },
+  {
+   "cell_type": "markdown",
+   "metadata": {},
+   "source": [
+    "## Data Preparation"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "metadata": {},
+   "source": [
+    "XTrain = []\n",
+    "for idx in range(ntrain):\n",
+    "    path = join(prefix, imgfix, ftrain[idx][0][0])\n",
+    "    try:\n",
+    "        img = image.load_img(path, target_size=(224, 224))\n",
+    "        x = image.img_to_array(img)\n",
+    "        x = np.expand_dims(x, axis=0)\n",
+    "        XTrain.append(resnet50.preprocess_input(x))\n",
+    "    except:\n",
+    "        print('Error at processing the', idx, 'images.')\n",
+    "\n",
+    "XTrain = np.vstack(XTrain)"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "metadata": {},
+   "source": [
+    "XTest = []\n",
+    "for idx in range(ntest):\n",
+    "    path = gen_path(idx)\n",
+    "    try:\n",
+    "        img = image.load_img(path, target_size=(224, 224))\n",
+    "        x = image.img_to_array(img)\n",
+    "        x = np.expand_dims(x, axis=0)\n",
+    "        XTest.append(resnet50.preprocess_input(x))\n",
+    "    except:\n",
+    "        print('Error at processing the', idx, 'images.')\n",
+    "        \n",
+    "XTest = np.vstack(XTest)"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "metadata": {},
+   "source": [
+    "# print(XTrain.shape)\n",
+    "print(XTest.shape)"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "metadata": {},
+   "source": [
+    "## Classify using ImageNet Classes with ResNet50"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": null,
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "resnet50_naive = resnet50.ResNet50(weights='imagenet')\n",
+    "# YTest = resnet50_naive.predict(XTest)"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": null,
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "resnet50_naive.compile('SGD', loss=losses.categorical_crossentropy, metrics={'output_a': 'accuracy'})"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": null,
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "YTest_ = resnet50_naive.evaluate_generator(Test)"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": null,
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "YTest_"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": null,
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "Test.total_batches_seen"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": null,
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "print XTest[0:1000, :, :, :].shape\n",
+    "print YTest.shape"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": null,
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "# YTest = resnet50.decode_predictions(YTest, top=3)[0]\n",
+    "\n",
+    "correct, top = 0, 1\n",
+    "\n",
+    "for idx in range(ntest):\n",
+    "    pred = resnet50.decode_predictions(YTest[idx:idx+1,:], top=top)[0]\n",
+    "    for k in range(top):\n",
+    "        if pred[k][1] not in DogBreed:\n",
+    "            continue\n",
+    "        labl = DogBreed[pred[k][1]]\n",
+    "        if labl == gen_labl(idx):\n",
+    "            correct += 1\n",
+    "            break\n",
+    "\n",
+    "\n",
+    "print(correct)\n",
+    "print(correct / float(ntest))\n",
+    "    "
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "metadata": {},
+   "source": [
+    "## VGG19"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": null,
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "vgg19_naive = vgg19.VGG19(weights='imagenet')\n",
+    "vgg19_model = keras.models.Model(inputs=vgg19_naive.input, \n",
+    "                                 outputs=vgg19_naive.get_layer('block4_pool').output)"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": null,
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "vgg19_naive.get_layer(name=0, index=20)"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": null,
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "# XTest = []\n",
+    "for idx in range(ntest):\n",
+    "    path = gen_path(idx)\n",
+    "    try:\n",
+    "        x = get_imgs(idx)\n",
+    "        XTest.append(vgg19.preprocess_input(x))\n",
+    "    except:\n",
+    "        print('Error at processing the', idx, 'images.')\n",
+    "        \n",
+    "XTest = np.vstack(XTest)"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": null,
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "YTest = vgg19_naive.predict(XTest)"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "metadata": {},
+   "source": [
+    "X1 = vgg19.preprocess_input(x)\n",
+    "X2 = resnet50.preprocess_input(x)\n",
+    "X3 = densenet.preprocess_input(x)\n",
+    "X4 = inception_v3.preprocess_input(x)"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "metadata": {},
+   "source": [
+    "print np.sum(X2 - X1)\n",
+    "print np.sum(X3 - X2)\n",
+    "print np.sum(X4 - X3)"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": null,
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "correct, top = 0, 1\n",
+    "\n",
+    "for idx in range(ntest):\n",
+    "    pred = vgg19.decode_predictions(YTest[idx:idx+1,:], top=top)[0]\n",
+    "    for k in range(top):\n",
+    "        if pred[k][1] not in DogBreed:\n",
+    "            continue\n",
+    "        labl = DogBreed[pred[k][1]]\n",
+    "        if labl == gen_labl(idx):\n",
+    "            correct += 1\n",
+    "            break\n",
+    "\n",
+    "\n",
+    "print(correct)\n",
+    "print(correct / float(ntest))"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "metadata": {},
+   "source": [
+    "## DenseNet"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": null,
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "densenet121_naive = densenet.DenseNet121(weights='imagenet', include_top=False)"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": null,
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "densenet121_naive.summary()"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": null,
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "densenet121_naive.summary()"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": null,
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "XTest = []\n",
+    "for idx in range(ntest):\n",
+    "    path = gen_path(idx)\n",
+    "    try:\n",
+    "        x = get_imgs(idx)\n",
+    "        XTest.append(densenet.preprocess_input(x))\n",
+    "    except:\n",
+    "        print('Error at processing the', idx, 'images.')\n",
+    "        \n",
+    "XTest = np.vstack(XTest)"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": null,
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "YTest = densenet121_naive.predict(XTest)"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": null,
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "correct, top = 0, 1\n",
+    "\n",
+    "for idx in range(ntest):\n",
+    "    pred = densenet.decode_predictions(YTest[idx:idx+1,:], top=top)[0]\n",
+    "    for k in range(top):\n",
+    "        if pred[k][1] not in DogBreed:\n",
+    "            continue\n",
+    "        labl = DogBreed[pred[k][1]]\n",
+    "        if labl == gen_labl(idx):\n",
+    "            correct += 1\n",
+    "            break\n",
+    "\n",
+    "\n",
+    "print(correct)\n",
+    "print(correct / float(ntest))"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "metadata": {},
+   "source": [
+    "## InceptionV3"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": null,
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "class SaveModelandEval(callbacks.Callback):\n",
+    "    def on_epoch_end(self, epoch, logs):\n",
+    "        if epoch == 0: return\n",
+    "        if epoch % 20 == 0:\n",
+    "            models.save_model(inceptionv3_modified, 'fc120'+str(epoch) )\n",
+    "            print inceptionv3_modified.evaluate_generator(Test,  verbose=1) \n",
+    "            "
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": null,
+   "metadata": {},
+   "outputs": [],
+   "source": []
+  },
+  {
+   "cell_type": "code",
+   "execution_count": null,
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "inceptionv3_naive = inception_v3.InceptionV3(weights='imagenet', include_top=False)"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": null,
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "x = inceptionv3_naive.output\n",
+    "print x.shape\n",
+    "\n",
+    "# x = layers.MaxPooling2D(pool_size=(2, 2), strides=(2, 2))(x)\n",
+    "# print x.shape\n",
+    "\n",
+    "x = layers.GlobalAveragePooling2D()(x)\n",
+    "print x.shape\n",
+    "\n",
+    "# x = layers.Dense(1024, activation='relu')(x)\n",
+    "# print x.shape\n",
+    "pred = layers.Dense(120, activation='softmax')(x)\n",
+    "print pred.shape"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": null,
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "inceptionv3_modified = models.Model(inputs=inceptionv3_naive.input, outputs=pred)\n",
+    "\n",
+    "for layer in inceptionv3_naive.layers:\n",
+    "    layer.trainable = False\n",
+    "\n",
+    "inceptionv3_modified.compile(optimizer='SGD', loss='categorical_crossentropy', metrics=['accuracy'])\n",
+    "# "
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": null,
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "inceptionv3_modified = models.load_model('fc12080')"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": null,
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "inceptionv3_modified.summary()"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": null,
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "print inceptionv3_modified.evaluate_generator(Train, verbose=1)\n",
+    "print inceptionv3_modified.evaluate_generator(Valid, verbose=1)\n",
+    "print inceptionv3_modified.evaluate_generator(Test,  verbose=1)"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": null,
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "inceptionv3_modified.fit_generator(\n",
+    "    Train, \n",
+    "#     steps_per_epoch=5, \n",
+    "    epochs=121, \n",
+    "    verbose=1, \n",
+    "#     validation_data=Valid, \n",
+    "#     validation_steps=60, \n",
+    "    initial_epoch=100,\n",
+    "    callbacks=[SaveModelandEval()])"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": null,
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "models.save_model(inceptionv3_modified, 'fc120')"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": null,
+   "metadata": {},
+   "outputs": [],
+   "source": []
+  },
+  {
+   "cell_type": "markdown",
+   "metadata": {},
+   "source": [
+    "## 20 epochs"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": null,
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "print inceptionv3_modified.evaluate_generator(Train, verbose=1)\n",
+    "print inceptionv3_modified.evaluate_generator(Valid, verbose=1)\n",
+    "print inceptionv3_modified.evaluate_generator(Test, verbose=1)"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "metadata": {},
+   "source": [
+    "## 40 epochs"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": null,
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "print inceptionv3_modified.evaluate_generator(Train, verbose=1)\n",
+    "print inceptionv3_modified.evaluate_generator(Valid, verbose=1)\n",
+    "print inceptionv3_modified.evaluate_generator(Test, verbose=1)"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "metadata": {},
+   "source": [
+    "### Save the trained models"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": null,
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "models.save_model(incptionv3_modified, 'fc120')"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": null,
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "inceptionv3_modified.metrics_names\n",
+    "\n"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": null,
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "incptionv3_modified.fit_generator(Train, steps_per_epoch=100, epochs=10, verbose=1)"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": null,
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "Eval_35 = incptionv3_modified.evaluate_generator(Test)\n",
+    "print(Eval_35)"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": null,
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "h = incptionv3_modified.fit_generator(Train, epochs=10, verbose=1)"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": null,
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "Eval_45 = incptionv3_modified.evaluate_generator(Test)\n",
+    "print(Eval_45)"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": null,
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "Eval_55 = incptionv3_modified.evaluate_generator(Test)\n",
+    "print(Eval_55)"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "metadata": {},
+   "source": [
+    "XTest = []\n",
+    "for idx in range(ntest):\n",
+    "    path = gen_path(idx)\n",
+    "    try:\n",
+    "        x = get_imgs(idx)\n",
+    "        XTest.append(inception_v3.preprocess_input(x))\n",
+    "    except:\n",
+    "        print('Error at processing the', idx, 'images.')\n",
+    "        \n",
+    "XTest = np.vstack(XTest)"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "metadata": {},
+   "source": [
+    "YTest = inceptionv3_naive.predict(XTest)"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "metadata": {},
+   "source": [
+    "correct, top = 0, 1\n",
+    "\n",
+    "for idx in range(ntest):\n",
+    "    pred = inception_v3.decode_predictions(YTest[idx:idx+1,:], top=top)[0]\n",
+    "    for k in range(top):\n",
+    "        if pred[k][1] not in DogBreed:\n",
+    "            continue\n",
+    "        labl = DogBreed[pred[k][1]]\n",
+    "        if labl == gen_labl(idx):\n",
+    "            correct += 1\n",
+    "            break\n",
+    "\n",
+    "print(correct)\n",
+    "print(correct / float(ntest))"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "metadata": {},
+   "source": []
+  }
+ ],
+ "metadata": {
+  "kernelspec": {
+   "display_name": "Python 2",
+   "language": "python",
+   "name": "python2"
+  },
+  "language_info": {
+   "codemirror_mode": {
+    "name": "ipython",
+    "version": 2
+   },
+   "file_extension": ".py",
+   "mimetype": "text/x-python",
+   "name": "python",
+   "nbconvert_exporter": "python",
+   "pygments_lexer": "ipython2",
+   "version": "2.7.12"
+  }
+ },
+ "nbformat": 4,
+ "nbformat_minor": 2
+}
