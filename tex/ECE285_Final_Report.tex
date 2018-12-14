@@ -12,7 +12,7 @@
 %     \usepackage[preprint]{neurips_2018}
 
 % to compile a camera-ready version, add the [final] option, e.g.:
-     \usepackage[final]{nips_2018}
+\usepackage[final]{nips_2018}
 
 % to avoid loading the natbib package, add option nonatbib:
 %     \usepackage[nonatbib]{neurips_2018}
@@ -75,7 +75,7 @@ In order to improve the performance of the network, CNN model nowadays has becom
 
 \begin{figure}[H]
 	\centering
-	\includegraphics[width=3.5in]{CNN} 
+	\includegraphics[width=3.5in]{pics/CNN} 
 	\caption{Basic structure of CNN.}
 \end{figure}
 
@@ -83,15 +83,15 @@ In order to improve the performance of the network, CNN model nowadays has becom
 
 In our project, we apply several CNN models for image classification. ResNet-50, DenseNet, VGG19, InceptionV3 and transfer learning were used to build our neural networks.
 
-\subsection{ResNet-50}
+%\subsection{ResNet-50}
 
-Deep convolutional neural networks have been widely used for image classification in order to get a better accuracy, however, as the neural networks become deeper, gradient vanishing and exploding problem will appear, which make the networks difficult to learn. ResNet are introduced to solve gradient vanishing and exploding problem and allow us to train much deeper networks. ResNet are a neural network consist of residual blocks, each residual block is 2 or 3 layers deep. By stacking residual blocks, ResNet can assure their performance when the networks become deeper. The main idea of ResNet is to add a shortcut connection from one layer to another much deeper layer. With Residual Networks, we can train deeper neural networks with more than 1000 layers. [2] ResNet-50 is a residual network with 50 layers, it uses bottleneck building block as its residual blocks. ResNet-50 can achieve 5.25\% top-5 error rate on the ImageNet validation set.
+%Deep convolutional neural networks have been widely used for image classification in order to get a better accuracy, however, as the neural networks become deeper, gradient vanishing and exploding problem will appear, which make the networks difficult to learn. ResNet are introduced to solve gradient vanishing and exploding problem and allow us to train much deeper networks. ResNet are a neural network consist of residual blocks, each residual block is 2 or 3 layers deep. By stacking residual blocks, ResNet can assure their performance when the networks become deeper. The main idea of ResNet is to add a shortcut connection from one layer to another much deeper layer. With Residual Networks, we can train deeper neural networks with more than 1000 layers. [2] ResNet-50 is a residual network with 50 layers, it uses bottleneck building block as its residual blocks. ResNet-50 can achieve 5.25\% top-5 error rate on the ImageNet validation set.
 
-\begin{figure}[H]
-	\centering
-	\includegraphics[width=3.5in]{resnet} 
-	\caption{Basic architecture of ResNet.}
-\end{figure}
+%\begin{figure}[H]
+%	\centering
+%	\includegraphics[width=3.5in]{pics/resnet} 
+%	\caption{Basic architecture of ResNet.}
+%\end{figure}
 
 \subsection{DenseNet}
 
@@ -101,7 +101,7 @@ In DenseNet, fewer parameters is needed, which means the parameters in DenseNet 
 
 \begin{figure}[H]
 	\centering
-	\includegraphics[width=3.5in]{densenet} 
+	\includegraphics[width=3.5in]{pics/densenet} 
 	\caption{A deep DenseNet with three dense blocks.}
 \end{figure}
 
@@ -111,7 +111,7 @@ VGG is a network of increasing depth using an architecture with very small convo
 
 \begin{figure}[H]
 	\centering
-	\includegraphics[width=3.5in]{vgg} 
+	\includegraphics[width=3.5in]{pics/vgg} 
 	\caption{VGG19 architecture.}
 \end{figure}
 
@@ -124,7 +124,7 @@ InceptionV3, as the improved model of Inception networks, has 42 layers, which i
 
 \begin{figure}[H]
 	\centering
-	\includegraphics[width=3.5in]{inception} 
+	\includegraphics[width=3.5in]{pics/inception} 
 	\caption{InceptionV3 architecture.}
 \end{figure}
 
@@ -132,6 +132,11 @@ InceptionV3, as the improved model of Inception networks, has 42 layers, which i
 
 Transfer learning is a machine learning technique where a model trained on one task is re-purposed on a second related task. In traditional CNN for image classification, usually the earlier layers are to detect edges, while deeper layers will try to detect some specific features. With transfer learning, we can use the earlier layers to re-train the deeper layers. The main benefit transfer learning is saving training time without hurting the performance. Also, with transfer learning, we can use less data to train the neural networks. 
 
+\section{Implementation Details}
+
+In this section, we 
+
+\newpage
 \section{Experimental Settings}
 
 \subsection{Datasets}
@@ -140,9 +145,30 @@ The dataset we used in this project is Stanford Dogs Dataset, which contains ima
 
 \begin{figure}[H]
 	\centering
-	\includegraphics[width=3.5in]{dogs} 
+	\includegraphics[width=3.5in]{pics/dogs} 
 	\caption{Stanford Dogs Dataset.}
 \end{figure}
+
+
+\subsection{Training Parameters}
+\subsection{Hardware Used}
+
+\newpage
+\section{Results}
+
+\subsection{InceptionV3}
+\subsection{DenseNet121}
+\subsection{VGG19}
+
+\subsection{Comparision}
+
+\newpage
+\section{Discussion}
+
+
+
+\section{Appendix}
+
 
 \section*{References}
 
