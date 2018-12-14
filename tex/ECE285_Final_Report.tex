@@ -159,12 +159,49 @@ The dataset we used in this project is Stanford Dogs Dataset, which contains ima
 \subsection{InceptionV3}
 \subsection{DenseNet121}
 \subsection{VGG19}
-
+\begin{table}[h]
+	\centering
+	
+	\begin{tabular}{|c|c|}
+		\hline
+		Number of selected categories & Accuracy \\\hline
+		20 & 87.31\\
+		40 & 83.53\\
+		60 & 80.01\\
+		80 & 76.29\\
+		100 & 74.42\\
+		120 & 70.67\\
+		\hline
+	\end{tabular}
+\caption{Accuracy versus categories selected}
+\end{table}
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=3.5in]{pics/vgg19_1} 
+	\caption{Accuracy versus categories selected}
+\end{figure}
+The test accuracy of our algorithm is 70.07\% if all 120 dog breeds are included. 
 \subsection{Comparision}
 
 \newpage
 \section{Discussion}
-
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=1.5in]{pics/correct_samples} 
+	\caption{Some correctly classified samples}
+\end{figure}
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=1.5in]{pics/wrong_samples} 
+	\caption{Some misclassified samples}
+	
+\end{figure}
+From the above misclassified samples, the color of the background is so much close to the dog, which will  We also notice that in the training test there exist some images contains more than one dog and same image appears twice in two different breeds as shown in below. This type of error seems not solvable via programming. 
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=2in]{pics/two_dogs} 
+	\caption{Sample of more than one dogs}
+\end{figure}
 
 
 \section{Appendix}
