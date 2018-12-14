@@ -69,6 +69,14 @@ Dog have become more and more important in our daily life, they appear as pets, 
 
 \subsection{Challenges}
 
+In order to classify the dogs successfully, we need to deal with some challenges. 
+The first challenge is that there are many breeds of dogs in the world, which means the computer vision algorithm needs to take into consideration a great number of categories. And based on No-Free-Lunch-Theorem, with the number of dogs' breeds increasing, the accuracy of dog classification will decrease to some extent.
+
+
+The second challenge is that some breeds of dogs have very similar appearance, such as Samoye and Japanese Spitz, Bichon Frise and Teddy dog, Chihuahua and Minlature Pinscher, etc. Some of these dogs are even too similar for human beings to distinguish from one another. Therefore, how to accurately classify these similar dogs is a big challenge.
+
+The third challenge lies in the fact that we have limited number of training images per class, which means we need to make the best use of the images to extract the features of different kinds of dogs. Therefore, we need to find a good way to process the original images to get as much information as possible. 
+
 \subsection{Convolutional Neural Network}
 
 Deep learning models have achieved remarkable results in computer vision in recent years. [1] As one of the deep learning networks, Convolutional Neural Network has widely used around the world for image classification. The CNN consist of neurons and the weights and biases of the neurons can be trained. Each neuron receives some inputs, performs a dot product and optionally follows it with a non-linearity. Convolutional layer, pooling layer, and fully-connected layer are the three main types of layers of Convolutional Neural Network.
