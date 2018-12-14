@@ -81,17 +81,35 @@ In order to improve the performance of the network, CNN model nowadays has becom
 
 \section{Description of methods}
 
-In our project, we apply several CNN models for image classification. ResNet-50, DenseNet, VGG19, InceptionV3 and transfer learning were used to build our neural networks.
+In this project, we will adopt several CNN models for the purpose of image classification. 
+The past ten years have witnessed great success in the performance of deep network handling the problem of image classification. 
+And there have been serverl great framewark or architectures successful achieve below the $5\%$ top five error rate. 
+Such as the \textbf{DenseNet}, \textbf{ResNet} and \textbf{Inception}. 
+The former two methods adopt the concepts of \emph{shortcut connections}, while the latter one utilize the manner of \emph{factorizing convolutions}. 
+The purpose of these methods is inituitive, by reducing the parameter of deep network so as to allow for the network to grow deeper and deeper. 
 
-%\subsection{ResNet-50}
+Therefore, in this project, we wish to explore the difference between these methods. 
+Namely, we wish to see the difference of \emph{a) shortcut connections} and \emph{b) factorizing convolutions} in perforing large scale, multi-labeled image classifications.
+Unlike the basic classifcation problems, where the objects being classified varied in a wide range.  
+In this projects, we wish to examine how well the deep network can handle the classification of similar objects. 
 
-%Deep convolutional neural networks have been widely used for image classification in order to get a better accuracy, however, as the neural networks become deeper, gradient vanishing and exploding problem will appear, which make the networks difficult to learn. ResNet are introduced to solve gradient vanishing and exploding problem and allow us to train much deeper networks. ResNet are a neural network consist of residual blocks, each residual block is 2 or 3 layers deep. By stacking residual blocks, ResNet can assure their performance when the networks become deeper. The main idea of ResNet is to add a shortcut connection from one layer to another much deeper layer. With Residual Networks, we can train deeper neural networks with more than 1000 layers. [2] ResNet-50 is a residual network with 50 layers, it uses bottleneck building block as its residual blocks. ResNet-50 can achieve 5.25\% top-5 error rate on the ImageNet validation set.
 
-%\begin{figure}[H]
-%	\centering
-%	\includegraphics[width=3.5in]{pics/resnet} 
-%	\caption{Basic architecture of ResNet.}
-%\end{figure}
+
+VGG19, DenseNet, InceptionV3 and transfer learning were used to build our neural networks.
+
+
+
+\subsection{VGG19}
+\subsubsection{Introduction}
+VGG is a network of increasing depth using an architecture with very small convolution filters. With small convolution filters, the number of parameters can be reduced. The input of VGG is 224*224 RGB images. Then the input image will go through the convolutional layers, where filters with a small receptive field will be applied. Each convolutional layer has different depth, some of the convolutional layers will have a max-pooling layer followed, and the max-pooling layer has a 2$\times$2 pixels window with stride 2. With max-pooling layers, VGG can achieve spatial pooling. After the stack of convolutional layers three fully connected layers are followed. The first two layers have 4096 channels each, the third have 1000 channels. And the last layer of the network is a soft max layer. After the input go through the whole network, the output will be classification contains 1000 channels. VGG16 and VGG19 are the two most common models of VGG. VGG 16 has 16 weight layers which has about 138 million of parameters in total, while VGG19 has 19 weight layers which has about 144 million of parameters in total. [4] The model we will use in our project is VGG19, it can achieve 7.3\% top 5 error in ILSVRC.
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=3.5in]{pics/vgg} 
+	\caption{VGG19 architecture.}
+\end{figure}
+
+\subsubsection{title}
 
 \subsection{DenseNet}
 
@@ -101,19 +119,11 @@ In DenseNet, fewer parameters is needed, which means the parameters in DenseNet 
 
 \begin{figure}[H]
 	\centering
-	\includegraphics[width=3.5in]{pics/densenet} 
+	\includegraphics[width=0.8\linewidth]{pics/densenet} 
 	\caption{A deep DenseNet with three dense blocks.}
 \end{figure}
 
-\subsection{VGG19}
 
-VGG is a network of increasing depth using an architecture with very small convolution filters. With small convolution filters, the number of parameters can be reduced. The input of VGG is 224*224 RGB images. Then the input image will go through the convolutional layers, where filters with a small receptive field will be applied. Each convolutional layer has different depth, some of the convolutional layers will have a max-pooling layer followed, and the max-pooling layer has a 2$\times$2 pixels window with stride 2. With max-pooling layers, VGG can achieve spatial pooling. After the stack of convolutional layers three fully connected layers are followed. The first two layers have 4096 channels each, the third have 1000 channels. And the last layer of the network is a soft max layer. After the input go through the whole network, the output will be classification contains 1000 channels. VGG16 and VGG19 are the two most common models of VGG. VGG 16 has 16 weight layers which has about 138 million of parameters in total, while VGG19 has 19 weight layers which has about 144 million of parameters in total. [4] The model we will use in our project is VGG19, it can achieve 7.3\% top 5 error in ILSVRC.
-
-\begin{figure}[H]
-	\centering
-	\includegraphics[width=3.5in]{pics/vgg} 
-	\caption{VGG19 architecture.}
-\end{figure}
 
 \subsection{InceptionV3}
 
