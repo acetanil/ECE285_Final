@@ -40,8 +40,8 @@
 % \AND instead of \And before the third author name.
 
 \author{%
-  Yizhou Chen\\
-  \texttt{yic244@ucsd.edu} \\
+   Yisheng Ji\\
+  \texttt{y3ji@ucsd.edu} \\
   \And
   Zhongke Ma\\
   \texttt{z2ma@ucsd.edu} \\
@@ -49,8 +49,8 @@
   Qichao Zheng\\
   \texttt{q5zheng@ucsd.edu} \\
   \And
-  Yisheng Ji\\
-  \texttt{y3ji244@ucsd.edu} \\
+  Yizhou Chen\\
+  \texttt{yichen@ucsd.edu} 
 }
 
 \begin{document}
@@ -59,7 +59,7 @@
 \maketitle
 
 \begin{abstract}
-  In this project, we achieve classification of dog breeds from Stanford Dog Dataset which contains images of 120 dog breeds. ResNet50, DenseNet, VGG19 and InceptionV3 were used to extract the features. To get a better accuracy, we apply transfer learning on different networks such as VGG19 and InceptionV3. These networks were already built on Keras, which is a deep learning library and provides some popular neural networks. The result of this project can be used in identification of dogs in images.
+  In this project, we achieve classification of dog breeds from Stanford Dog Dataset which contains images of 120 dog breeds. DenseNet, VGG19 and InceptionV3 were used to extract the features. To get a better accuracy, we apply transfer learning on different networks such as VGG19 and InceptionV3. These networks were already built on Keras, which is a deep learning library and provides some popular neural networks. The result of this project can be used in identification of dogs in images.
 \end{abstract}
 
 \section{Introduction}
@@ -112,9 +112,9 @@ More and more models have shown that convolutional neural networks can become su
 
 In DenseNet, fewer parameters is needed, which means the parameters in DenseNet can be more efficiency than traditional neural networks. Besides, DenseNet can be deep while the layers can be slim. With all these advantages, DenseNet is easily to be trained.
 
-\begin{figure}[H]
+\begin{figure}[h]
 	\centering
-	\includegraphics[width=0.8\linewidth]{pics/densenet} 
+	\includegraphics[width=0.8\linewidth]{pics/adensenet} 
 	\caption{A deep DenseNet with three dense blocks.}
 \end{figure}
 
@@ -167,6 +167,7 @@ Table~\ref{tab:1} demenstartes one of the prototype of the deep network that wil
 \subsection{Dataset}
 As for the dataset, we have $12,000$ samples for training and $8,580$ samples for testing. We further adopted the method of data augmentation to enhance the numbers of the training set. More specifily, we adopt some random \emph{shifts}, \emph{zooms}, \emph{rotates} and \emph{filps} to tarnsform the origin image, so as to obtained the augmented data for training. This method, does somehow improve the performance of our model. 
 \subsection{Losses}
+\label{sec:loss}
 As for the loss function, we basically use both the \emph{categorical\_crossentropy} and \emph{sparse\_categorical\_crossentropy} that are typically adopted in classification problem. 
 Also, by some literature review, we have also try to adopted the \emph{center loss} $\mathcal{L}_C$, as a regualrized term for the training of our model, which is found to be significant useful in classifying similar targets. Therefore, we define the loss of our model as
 \begin{equation}
@@ -228,32 +229,10 @@ To avoid the problem of packages' version compatibility, we adopted the offical 
 
 \section{Results}
 
-\subsection{VGG19}
-As the forerunner of deep network in image classification, \emph{VGG19} does somehow introduce some very important concepts, such as \emph{going deeper}, \emph{reduce parameters}. 
-It is very basic model in understanding how \emph{convolutional neural network} can be experted in classifying images. 
-Therefore, we first examine the performance of \emph{VGG19} under our experimental settings as described in Section~\ref{sec:ex}.
-
-The orginal \emph{VGG19} network have $19$ weighted layers and with the last flatten layers given a output of $(1, 25088)$ feature vector. 
-Followed by $3$ fully connected layers with $4096$, $4096$ and $1000$ outputs each. 
-This however, for our dataset with onlt $120$ classes, seems a litte trival. 
-Table~\ref{tab:vgg19} described the details of our modified \emph{VGG19} network. 
-\begin{table}[h]
+\begin{figure}[h]
 	\centering
-	\caption{\emph{VGG19} Plugged Layers}
-	\label{tab:vgg19}
-	\begin{tabular}{c|ccc}
-		\toprule
-		layer & input dims & output dims & comments \\
-		\midrule
-		\emph{fc} & $(n, 25088)$ & $(n,4096)$ & \emph{fixed} \\
-		\emph{dropout} & -- & -- &  $r =  0.5$ \\
-		\emph{fc} & $(n,4096)$ & $(n,120)$ & \emph{predictions} \\
-		\bottomrule
-	\end{tabular}
-\end{table}
-
-\begin{figure}[htb]
-	\centering
+	\caption{Results of Top-$k$ Accuracy Verses $k$ index}
+	\label{fig:plot}
 	\begin{subfigure}{0.48\linewidth}
 		\centering
 		\includegraphics[width=\linewidth]{pics/Model_naive}
@@ -262,7 +241,7 @@ Table~\ref{tab:vgg19} described the details of our modified \emph{VGG19} network
 	\end{subfigure} 
 	\begin{subfigure}{0.48\linewidth}
 		\centering
-		\includegraphics[width=\linewidth]{pics/Model_naive}
+		\includegraphics[width=\linewidth]{pics/vgg19_acc}
 		\caption{Results of \emph{VGG19}}
 		\label{fig:vgg19}
 	\end{subfigure} 
@@ -278,9 +257,31 @@ Table~\ref{tab:vgg19} described the details of our modified \emph{VGG19} network
 		\caption{Results of \emph{DenseNet}}
 		\label{fig:densenet}
 	\end{subfigure} 
-	\label{fig:ress}
-	\caption{Results of Top-$k$ Accuracy Verses $k$ index}
 \end{figure}
+
+\subsection{VGG19}
+As the forerunner of deep network in image classification, \emph{VGG19} does somehow introduce some very important concepts, such as \emph{going deeper}, \emph{reduce parameters}. 
+It is very basic model in understanding how \emph{convolutional neural network} can be experted in classifying images. 
+Therefore, we first examine the performance of \emph{VGG19} under our experimental settings as described in Section~\ref{sec:ex}.
+
+The orginal \emph{VGG19} network have $19$ weighted layers and with the last flatten layers given a output of $(1, 25088)$ feature vector. 
+Followed by $3$ fully connected layers with $4096$, $4096$ and $1000$ outputs each. 
+This however, for our dataset with onlt $120$ classes, seems a litte trival. 
+Table~\ref{tab:vgg19} described the details of our modified \emph{VGG19} network. 
+\begin{table}[t]
+	\centering
+	\caption{\emph{VGG19} Plugged Layers}
+	\label{tab:vgg19}
+	\begin{tabular}{c|ccc}
+		\toprule
+		layer & input dims & output dims & comments \\
+		\midrule
+		\emph{fc} & $(n, 25088)$ & $(n,4096)$ & \emph{fixed} \\
+		\emph{dropout} & -- & -- &  $r =  0.5$ \\
+		\emph{fc} & $(n,4096)$ & $(n,120)$ & \emph{predictions} \\
+		\bottomrule
+	\end{tabular}
+\end{table}
 
 
 \subsection{InceptionV3}
@@ -288,31 +289,89 @@ We further explored the effects different plugged layers based on \emph{Google}'
 Results of those methods are ploted in the form of \emph{top-k accuracy verse k index}, as in Figure~\ref{fig:incetionp}
 
 Noted that, by implementing \emph{fully-connected} layers with / without \emph{dropout} layers can results in significant difference, 
-this is because the neural networks are, by natura, likely to be overfitted, especially in case of multi-layer classifier. 
-Also, 
+this is because the neural networks are, by natural, likely to be overfitted, especially in case of multi-layer classifier. 
+Also, we further noted that introducing the \emph{center loss}, as described in Section~\ref{sec:loss}, canot enhance the performance of the network very much, while significant increase the difficult of both implementation and trainning, therefore we will not include the results here. 
+
+The performance of our modified version of \emph{Inception V3}, have significant improvement, as shown in Figure~\ref{fig:incetionp}, increase the top-$5$ accuracy from approx. $0.92$ to approx. $0.97$. 
 
 \subsection{DenseNet121}
-Counting on the results from \emph{InceptionV3}, we modified and trained the \emph{DenseNet121} network with only plugged \emph{dfc120} layers. Cause it can amlost achieve the same performance among the other architecture without introducing more parameters. 
+Bsed on the conclusions from \emph{InceptionV3}, we modified and trained the \emph{DenseNet121} network with only plugged \emph{dfc120} layers. Cause it can amlost achieve the same performance among the other architecture without introducing more parameters. 
 The final \emph{Dense Block} outputs a tensor with only $1024$ dimensions, 
 
 Figure~\ref{fig:densenet} shows the performance of our modified \emph{DenseNet} model. 
 
 \subsection{Comparision}
+In Figure~6, we evaluate the performance of different models by accuracy curves. When we use the naive pre-trained models to predict the dogs' breeds, the \emph{Inception V3} model and \emph{DenseNet121} model's accuracy are close to each other and both of them perform better than the \emph{VGG19} model. 
+
+After we change the classification layers of each model, all of their performance increase. For each model, the accuracy at top-$5$ increases about five percentage. We also fine tuned each model to achieve higher accuracy as much as possible. 
+We can see from Figure~\ref{fig:vgg19}, \ref{fig:incetionp} and \ref{fig:densenet} that after fine tuning, the \emph{DenseNet121} model has the highest accuracy, InceptionV3 follows behind and VGG19 performs worst among the three models.
 
 \subsection{Success Cases}
+In order to visualize the prediction result of the model, we show some successful cases. Some of these dogs' appearance are unique, which leads to high prediction accuracy. Results of these visulaizations are shown in Figure~7. 
+
 \subsection{Failures}
 In fact, some of the dog images of different classes within the dataset have almost the "\emph{same}" appearance, even a human without specifiied knowledge of the thoes dogs cannot discern between them. This, however, is the major cause of our deep network making mistakes. 
-Typically, under such cases, the outputs of the final layer of our network tend vote for  multi-classes with almost equal scores. This is the resson why the top-$1$ result is much low than top-$2$, $3$, $\cdots$. 
-Figure~\ref{fig:failures}
+Typically, under such cases, the outputs of the final layer of our network tend vote for  multi-classes with almost equal scores. This is the resson why the top-$1$ result is much low than top-$2$, $3$ and larger. As shown in Figure~8, we illustrate this problem by showing $3$ misclassified pairs in columns.
 
-\begin{figure}
+\newpage
+\begin{figure}[h]
+	\centering
+	\label{fig:success}
+	\begin{subfigure}{0.32\linewidth}
+		\centering
+		\includegraphics[width=\linewidth]{pics/success_basset}
+		\caption{ }
+		\emph{label} and \emph{predict}: Basset
+		\label{fig:success_basset}
+	\end{subfigure}
+	\begin{subfigure}{0.32\linewidth}
+		\centering
+		\includegraphics[width=\linewidth]{pics/success_saluki}
+		\caption{ }
+		\emph{label} and \emph{predict}: Saluki
+		\label{fig:dsuccess_saluki}
+	\end{subfigure}  
+	\begin{subfigure}{0.32\linewidth}
+		\centering
+		\includegraphics[width=\linewidth]{pics/success_dandie}
+		\caption{}
+		\emph{label} and \emph{predict}: Dandie
+		\label{fig:success_dandie}
+	\end{subfigure} 
+	
+	\begin{subfigure}{0.32\linewidth}
+		\centering
+		\includegraphics[width=\linewidth]{pics/success_york}
+		\caption{}
+		\emph{label} and \emph{predict}: Yorkshire terrier
+		\label{fig:success_york}
+	\end{subfigure} 
+	\begin{subfigure}{0.32\linewidth}
+		\centering
+		\includegraphics[width=\linewidth]{pics/success_bed}
+		\caption{}
+		\emph{label} and \emph{predict}: Bedlington terrier
+		\label{fig:success_bed}
+	\end{subfigure} 
+	\begin{subfigure}{0.32\linewidth}
+		\centering
+		\includegraphics[width=\linewidth]{pics/success_soft}
+		\caption{}
+		\emph{label} and \emph{predict}: Soft-coated wheaten terrier
+		\label{fig:success_soft}
+	\end{subfigure} 
+	
+	\caption{Examples of Success Cases shown in Columns.}
+\end{figure}
+
+\begin{figure}[h]
 	\centering
 	\label{fig:failures}
 	\begin{subfigure}{0.32\linewidth}
 		\centering
 		\includegraphics[width=\linewidth]{pics/f1}
 		\caption{ }
-		\emph{label}: Bernese Mountain Dog \\ \emph{predict}: EntleBucher
+		\emph{label} : Bernese Mountain Dog \\ \emph{predict}: EntleBucher
 		\label{fig:f1}
 	\end{subfigure}
 	\begin{subfigure}{0.32\linewidth}
@@ -354,15 +413,14 @@ Figure~\ref{fig:failures}
 	
 	\caption{Examples of Failure Pairs shown in Columns.}
 \end{figure}
-
+ 
 
 \newpage
 \section{Discussion}
-
 \subsection{Inference}
 Before we implement the VGG19 model, Densenet121 model and InceptionV3 model, we have a approximate estimation of the performance of these three models. Taking into consideration the architecture of the three models, we predicted that Densenet121 had the best performance and VGG model might behave worse than the other two models. 
 \subsection{Conclusion}
-From Fig~\ref{fig:ress} we can draw a conclusion that in naive conditions (Figure~\ref{fig:all3}), the VGG19 model has the lowest accuracy compared with the other two models. And after we change the last layer of the three models by a classifier with 120 classifications, the order of the accuracy remains the same. To be detail, DenseNet121 has the best performance, InceptionV3 just similar to DenseNet121 and VGG19 behaves worset in the three models. The results of the experiment just proved what we have predicted before we implemented the project.
+From Figure~6 we can draw a conclusion that in naive conditions (Figure~\ref{fig:all3}), the VGG19 model has the lowest accuracy compared with the other two models. And after we change the last layer of the three models by a classifier with 120 classifications, the order of the accuracy remains the same. To be detail, DenseNet121 has the best performance, InceptionV3 just similar to DenseNet121 and VGG19 behaves worset in the three models. The results of the experiment just proved what we have predicted before we implemented the project.
 
 We can also notice from the pictures Figure~\ref{fig:vgg19}, \ref{fig:incetionp} and \ref{fig:densenet}. that after we change the classifier and fine tune the last few layers, the performance of each model increases to some extent. This is because that the model is more specialized in dogs' breeds classification and therefore, it will have better performance than the more generalized one. 
 \subsection{Learning}
@@ -378,6 +436,32 @@ For the purpose of classifying the breed of dogs properly, several challenges ex
 In this project, we have tried three different models and evaluated their performance on the data set, from which we have the result of which model is good at recognizing different kinds of dogs and which is not. However, there are still many things that we can do in the future to improve the efficiency and accuracy of classifing dogs. The first thing we can do in the future is that we can combine the prediction result of the three models together and give out an 'mean' prediction. Since different models may extract different features of the same image, we can choose the best result by 'majority rule' or just choose the classification with the largest probability. 
 Another thing we can do is to collect more images of dogs to enlarge the training set. Since the number of training data is limited, the accuracy of all three models are not very satisfing. With more data, we are sure we can improve the accuracy much more.
 \section{Appendix}
+\subsection{Github Repo Link}
+\href{https://github.com/acetanil/ECE285\_Final.git}{Github Repo (https://github.com/acetanil/ECE285\_Final.git)}
+\subsection{Github Repo Readme}
+\# ECE285\_FInal
+
+Description \\
+=================== \\
+In this project, we achieve classification of dog breeds from Stanford Dog Dataset which contains images of 120 dog breeds. DenseNet, VGG19 and InceptionV3 were used to extract the features. To get a better accuracy, we apply transfer learning on different networks such as VGG19 and InceptionV3. These networks were already built on Keras, which is a deep learning library and provides some popular neural networks. The result of this project can be used in identification of dogs in images.
+\\ \\
+Requirements \\
+=================== \\
+TensorFlow version: 1.12.0
+keras      version: 2.1.6-ft
+\\ \\ 
+Run Time \\ 
+=================== \\ 
+launch-tf-gpu.sh
+\\ \\
+Code organization \\ 
+=================== \\
+src/evaluate\_naive.ipynb $\;\;\;$               --evaluate the naive conditions of three models \\
+src/inceptionV3.ipynb $\;\;\;\;\;\;$        --train, finetune the InceptionV3 model and evaluate its performance \\
+src/Densenet121.ipynb $\;\;\;\;\;$             --train, finetune the Densenet121 model and evaluate its performance \\
+src/VGG19.ipynb      $\;\;\;\;\;\;\;\;\;\;\;\;$             --train, finetune the InceptionV3 model and evaluate its performance \\
+src/main.ipynb       $\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;$             --try different losses and find the most proper one \\
+Stanford\_Dog\_Breed    $\;\;\;\;\;\;\;$            --The data set we used to train and evaluate \\
 
 
 \section*{References}

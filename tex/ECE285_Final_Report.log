@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.19 (TeX Live 2018) (preloaded format=pdflatex 2018.4.16)  14 DEC 2018 22:33
+This is pdfTeX, Version 3.14159265-2.6-1.40.19 (TeX Live 2018) (preloaded format=pdflatex 2018.4.16)  14 DEC 2018 23:56
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -491,7 +491,7 @@ Package microtype Info: Loading generic protrusion settings for font family
 (microtype)             See the microtype manual for details.
 LaTeX Font Info:    Font shape `T1/ptm/bx/n' in size <12> not available
 (Font)              Font shape `T1/ptm/b/n' tried instead on input line 61.
-<pics/CNN.jpg, id=124, 639.89063pt x 181.42781pt>
+<pics/CNN.jpg, id=132, 639.89063pt x 181.42781pt>
 File: pics/CNN.jpg Graphic file (type jpg)
 <use pics/CNN.jpg>
 Package pdftex.def Info: pics/CNN.jpg  used on input line 80.
@@ -504,99 +504,63 @@ Underfull \vbox (badness 1189) has occurred while \output is active []
 
 {/usr/local/texlive/2018/texmf-var/fonts/map/pdftex/updmap/pdftex.map} <./pics/
 CNN.jpg>]
-<pics/vgg.jpg, id=135, 602.25pt x 345.29pt>
+<pics/vgg.jpg, id=143, 602.25pt x 345.29pt>
 File: pics/vgg.jpg Graphic file (type jpg)
 <use pics/vgg.jpg>
 Package pdftex.def Info: pics/vgg.jpg  used on input line 105.
 (pdftex.def)             Requested size: 317.9892pt x 182.31789pt.
 [2 <./pics/vgg.jpg>]
-<pics/densenet.pdf, id=144, 433.62pt x 289.08pt>
-File: pics/densenet.pdf Graphic file (type pdf)
-<use pics/densenet.pdf>
-Package pdftex.def Info: pics/densenet.pdf  used on input line 117.
-(pdftex.def)             Requested size: 317.9892pt x 212.00146pt.
-<pics/inception.png, id=145, 963.6pt x 427.5975pt>
+<pics/adensenet.jpg, id=152, 5689.255pt x 812.03375pt>
+File: pics/adensenet.jpg Graphic file (type jpg)
+<use pics/adensenet.jpg>
+Package pdftex.def Info: pics/adensenet.jpg  used on input line 117.
+(pdftex.def)             Requested size: 317.9892pt x 45.38684pt.
+<pics/inception.png, id=153, 963.6pt x 427.5975pt>
 File: pics/inception.png Graphic file (type png)
 <use pics/inception.png>
 Package pdftex.def Info: pics/inception.png  used on input line 129.
 (pdftex.def)             Requested size: 317.9892pt x 141.1076pt.
-
-Underfull \vbox (badness 10000) has occurred while \output is active []
-
- [3 <./pics/densenet.pdf>] [4 <./pics/inception.png (PNG copy)>]
-Underfull \hbox (badness 7814) in paragraph at lines 170--172
+ [3 <./pics/adensenet.jpg> <./pics/inception.png (PNG copy)>]
+Underfull \hbox (badness 7814) in paragraph at lines 171--173
 \T1/ptm/m/n/10 (+20) As for the loss func-tion, we ba-si-cally use both the \T1
 /ptm/m/it/10 (+20) cat-e-gor-i-cal_crossentropy \T1/ptm/m/n/10 (+20) and
  []
 
-<pics/dogs.png, id=194, 683.55376pt x 277.035pt>
+[4]
+<pics/dogs.png, id=176, 683.55376pt x 277.035pt>
 File: pics/dogs.png Graphic file (type png)
 <use pics/dogs.png>
-Package pdftex.def Info: pics/dogs.png  used on input line 194.
+Package pdftex.def Info: pics/dogs.png  used on input line 195.
 (pdftex.def)             Requested size: 278.23827pt x 112.76923pt.
+<pics/Model_naive.pdf, id=179, 433.62pt x 289.08pt>
+File: pics/Model_naive.pdf Graphic file (type pdf)
+<use pics/Model_naive.pdf>
+Package pdftex.def Info: pics/Model_naive.pdf  used on input line 238.
+(pdftex.def)             Requested size: 190.79109pt x 127.19559pt.
+<pics/vgg19_acc.pdf, id=180, 433.62pt x 289.08pt>
+File: pics/vgg19_acc.pdf Graphic file (type pdf)
+<use pics/vgg19_acc.pdf>
+Package pdftex.def Info: pics/vgg19_acc.pdf  used on input line 244.
+(pdftex.def)             Requested size: 190.79109pt x 127.19559pt.
+<pics/InceptionV3.pdf, id=181, 433.62pt x 289.08pt>
+File: pics/InceptionV3.pdf Graphic file (type pdf)
+<use pics/InceptionV3.pdf>
+Package pdftex.def Info: pics/InceptionV3.pdf  used on input line 250.
+(pdftex.def)             Requested size: 190.79109pt x 127.19559pt.
+<pics/DenseNet.pdf, id=182, 433.62pt x 289.08pt>
+File: pics/DenseNet.pdf Graphic file (type pdf)
+<use pics/DenseNet.pdf>
+Package pdftex.def Info: pics/DenseNet.pdf  used on input line 256.
+(pdftex.def)             Requested size: 190.79109pt x 127.19559pt.
+
 
 LaTeX Warning: `h' float specifier changed to `ht'.
 
-[5 <./pics/dogs.png>]
-<pics/Model_naive.pdf, id=214, 433.62pt x 289.08pt>
-File: pics/Model_naive.pdf Graphic file (type pdf)
-<use pics/Model_naive.pdf>
-Package pdftex.def Info: pics/Model_naive.pdf  used on input line 259.
-(pdftex.def)             Requested size: 190.79109pt x 127.19559pt.
-File: pics/Model_naive.pdf Graphic file (type pdf)
-<use pics/Model_naive.pdf>
-Package pdftex.def Info: pics/Model_naive.pdf  used on input line 265.
-(pdftex.def)             Requested size: 190.79109pt x 127.19559pt.
-<pics/InceptionV3.pdf, id=215, 433.62pt x 289.08pt>
-File: pics/InceptionV3.pdf Graphic file (type pdf)
-<use pics/InceptionV3.pdf>
-Package pdftex.def Info: pics/InceptionV3.pdf  used on input line 271.
-(pdftex.def)             Requested size: 190.79109pt x 127.19559pt.
-<pics/DenseNet.pdf, id=216, 433.62pt x 289.08pt>
-File: pics/DenseNet.pdf Graphic file (type pdf)
-<use pics/DenseNet.pdf>
-Package pdftex.def Info: pics/DenseNet.pdf  used on input line 277.
-(pdftex.def)             Requested size: 190.79109pt x 127.19559pt.
+[5 <./pics/dogs.png>] [6 <./pics/Model_naive.pdf> <./pics/vgg19_acc.pdf
 
-
-Package caption Warning: \label without proper reference on input line 310.
-See the caption package documentation for explanation.
-
-
-LaTeX Warning: Reference `fig:failures' on page 6 undefined on input line 306.
-
-[6]
-<pics/f1.png, id=226, 318.18875pt x 237.88875pt>
-File: pics/f1.png Graphic file (type png)
-<use pics/f1.png>
-Package pdftex.def Info: pics/f1.png  used on input line 313.
-(pdftex.def)             Requested size: 127.1981pt x 95.09572pt.
-<pics/d1.png, id=227, 318.18875pt x 237.88875pt>
-File: pics/d1.png Graphic file (type png)
-<use pics/d1.png>
-Package pdftex.def Info: pics/d1.png  used on input line 320.
-(pdftex.def)             Requested size: 127.1981pt x 95.09572pt.
-<pics/s1.png, id=228, 318.18875pt x 237.88875pt>
-File: pics/s1.png Graphic file (type png)
-<use pics/s1.png>
-Package pdftex.def Info: pics/s1.png  used on input line 327.
-(pdftex.def)             Requested size: 127.1981pt x 95.09572pt.
-<pics/f2.png, id=229, 318.18875pt x 237.88875pt>
-File: pics/f2.png Graphic file (type png)
-<use pics/f2.png>
-Package pdftex.def Info: pics/f2.png  used on input line 335.
-(pdftex.def)             Requested size: 127.1981pt x 95.09572pt.
-<pics/d2.png, id=230, 318.18875pt x 237.88875pt>
-File: pics/d2.png Graphic file (type png)
-<use pics/d2.png>
-Package pdftex.def Info: pics/d2.png  used on input line 342.
-(pdftex.def)             Requested size: 127.1981pt x 95.09572pt.
-<pics/s2.png, id=231, 318.18875pt x 237.88875pt>
-File: pics/s2.png Graphic file (type png)
-<use pics/s2.png>
-Package pdftex.def Info: pics/s2.png  used on input line 349.
-(pdftex.def)             Requested size: 127.1981pt x 95.09572pt.
- [7 <./pics/Model_naive.pdf> <./pics/InceptionV3.pdf
+pdfTeX warning: /Library/TeX/texbin/pdflatex (file ./pics/vgg19_acc.pdf): PDF i
+nclusion: multiple pdfs with page group included in a single page
+> <./pics/InceptionV3.pdf
 
 pdfTeX warning: /Library/TeX/texbin/pdflatex (file ./pics/InceptionV3.pdf): PDF
  inclusion: multiple pdfs with page group included in a single page
@@ -604,38 +568,108 @@ pdfTeX warning: /Library/TeX/texbin/pdflatex (file ./pics/InceptionV3.pdf): PDF
 
 pdfTeX warning: /Library/TeX/texbin/pdflatex (file ./pics/DenseNet.pdf): PDF in
 clusion: multiple pdfs with page group included in a single page
->]
+>] [7]
+<pics/success_basset.png, id=349, 502.87875pt x 331.2375pt>
+File: pics/success_basset.png Graphic file (type png)
+<use pics/success_basset.png>
+Package pdftex.def Info: pics/success_basset.png  used on input line 322.
+(pdftex.def)             Requested size: 127.1981pt x 83.77959pt.
+<pics/success_saluki.png, id=350, 502.87875pt x 331.2375pt>
+File: pics/success_saluki.png Graphic file (type png)
+<use pics/success_saluki.png>
+Package pdftex.def Info: pics/success_saluki.png  used on input line 329.
+(pdftex.def)             Requested size: 127.1981pt x 83.77959pt.
+<pics/success_dandie.png, id=351, 502.87875pt x 331.2375pt>
+File: pics/success_dandie.png Graphic file (type png)
+<use pics/success_dandie.png>
+Package pdftex.def Info: pics/success_dandie.png  used on input line 336.
+(pdftex.def)             Requested size: 127.1981pt x 83.77959pt.
+<pics/success_york.png, id=352, 502.87875pt x 331.2375pt>
+File: pics/success_york.png Graphic file (type png)
+<use pics/success_york.png>
+Package pdftex.def Info: pics/success_york.png  used on input line 344.
+(pdftex.def)             Requested size: 127.1981pt x 83.77959pt.
+<pics/success_bed.png, id=353, 502.87875pt x 331.2375pt>
+File: pics/success_bed.png Graphic file (type png)
+<use pics/success_bed.png>
+Package pdftex.def Info: pics/success_bed.png  used on input line 351.
+(pdftex.def)             Requested size: 127.1981pt x 83.77959pt.
+<pics/success_soft.png, id=354, 502.87875pt x 331.2375pt>
+File: pics/success_soft.png Graphic file (type png)
+<use pics/success_soft.png>
+Package pdftex.def Info: pics/success_soft.png  used on input line 358.
+(pdftex.def)             Requested size: 127.1981pt x 83.77959pt.
+<pics/f1.png, id=355, 318.18875pt x 237.88875pt>
+File: pics/f1.png Graphic file (type png)
+<use pics/f1.png>
+Package pdftex.def Info: pics/f1.png  used on input line 372.
+(pdftex.def)             Requested size: 127.1981pt x 95.09572pt.
+<pics/d1.png, id=356, 318.18875pt x 237.88875pt>
+File: pics/d1.png Graphic file (type png)
+<use pics/d1.png>
+Package pdftex.def Info: pics/d1.png  used on input line 379.
+(pdftex.def)             Requested size: 127.1981pt x 95.09572pt.
+<pics/s1.png, id=357, 318.18875pt x 237.88875pt>
+File: pics/s1.png Graphic file (type png)
+<use pics/s1.png>
+Package pdftex.def Info: pics/s1.png  used on input line 386.
+(pdftex.def)             Requested size: 127.1981pt x 95.09572pt.
+<pics/f2.png, id=358, 318.18875pt x 237.88875pt>
+File: pics/f2.png Graphic file (type png)
+<use pics/f2.png>
+Package pdftex.def Info: pics/f2.png  used on input line 394.
+(pdftex.def)             Requested size: 127.1981pt x 95.09572pt.
+<pics/d2.png, id=359, 318.18875pt x 237.88875pt>
+File: pics/d2.png Graphic file (type png)
+<use pics/d2.png>
+Package pdftex.def Info: pics/d2.png  used on input line 401.
+(pdftex.def)             Requested size: 127.1981pt x 95.09572pt.
+<pics/s2.png, id=360, 318.18875pt x 237.88875pt>
+File: pics/s2.png Graphic file (type png)
+<use pics/s2.png>
+Package pdftex.def Info: pics/s2.png  used on input line 408.
+(pdftex.def)             Requested size: 127.1981pt x 95.09572pt.
+ [8 <./pics/success_basset.png> <./pics/success_saluki.png> <./pics/success_dan
+die.png> <./pics/success_york.png> <./pics/success_bed.png> <./pics/success_sof
+t.png> <./pics/f1.png> <./pics/d1.png> <./pics/s1.png> <./pics/f2.png> <./pics/
+d2.png> <./pics/s2.png>] [9]
+Underfull \hbox (badness 10000) in paragraph at lines 444--465
 
-Package caption Warning: \label without proper reference on input line 281.
-See the caption package documentation for explanation.
+ []
 
 
-LaTeX Warning: Reference `fig:ress' on page 8 undefined on input line 365.
+Underfull \hbox (badness 10000) in paragraph at lines 444--465
 
-[8 <./pics/f1.png> <./pics/d1.png> <./pics/s1.png> <./pics/f2.png> <./pics/d2.p
-ng> <./pics/s2.png>]
-Package atveryend Info: Empty hook `BeforeClearDocument' on input line 402.
- [9]
-Package atveryend Info: Empty hook `AfterLastShipout' on input line 402.
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 444--465
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 444--465
+
+ []
+
+Package atveryend Info: Empty hook `BeforeClearDocument' on input line 486.
+[10]
+Package atveryend Info: Empty hook `AfterLastShipout' on input line 486.
  (./ECE285_Final_Report.aux)
-Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 402.
-Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 402.
+Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 486.
+Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 486.
 Package rerunfilecheck Info: File `ECE285_Final_Report.out' has not changed.
-(rerunfilecheck)             Checksum: 6556F67F8C1BC7E8731776F3109EA317;1750.
-
-
-LaTeX Warning: There were undefined references.
-
-Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 402.
+(rerunfilecheck)             Checksum: 6A3FA0FBA5F9141CEB790067D062FD78;1884.
+Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 486.
  ) 
 Here is how much of TeX's memory you used:
- 9338 strings out of 492649
- 146016 string characters out of 6129622
- 273450 words of memory out of 5000000
- 12864 multiletter control sequences out of 15000+600000
- 40492 words of font info for 161 fonts, out of 8000000 for 9000
+ 9408 strings out of 492649
+ 147358 string characters out of 6129622
+ 271948 words of memory out of 5000000
+ 12908 multiletter control sequences out of 15000+600000
+ 41237 words of font info for 171 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
- 42i,9n,41p,1239b,520s stack positions out of 5000i,500n,10000p,200000b,80000s
+ 42i,9n,41p,1239b,529s stack positions out of 5000i,500n,10000p,200000b,80000s
 {/usr/local/texlive/2018/texmf-dist/fonts/enc/dvips/base/8r.enc}{/usr/local/t
 exlive/2018/texmf-dist/fonts/enc/dvips/cm-super/cm-super-t1.enc}</usr/local/tex
 live/2018/texmf-dist/fonts/type1/public/amsfonts/cm/cmex10.pfb></usr/local/texl
@@ -650,10 +684,10 @@ f-dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb></usr/local/texlive/2018/texmf
 ist/fonts/type1/urw/times/utmb8a.pfb></usr/local/texlive/2018/texmf-dist/fonts/
 type1/urw/times/utmr8a.pfb></usr/local/texlive/2018/texmf-dist/fonts/type1/urw/
 times/utmri8a.pfb>
-Output written on ECE285_Final_Report.pdf (9 pages, 1568776 bytes).
+Output written on ECE285_Final_Report.pdf (10 pages, 4338718 bytes).
 PDF statistics:
- 421 PDF objects out of 1000 (max. 8388607)
- 257 compressed objects within 3 object streams
- 55 named destinations out of 1000 (max. 500000)
- 23863 words of extra memory for PDF output out of 24883 (max. 10000000)
+ 450 PDF objects out of 1000 (max. 8388607)
+ 272 compressed objects within 3 object streams
+ 59 named destinations out of 1000 (max. 500000)
+ 23914 words of extra memory for PDF output out of 24883 (max. 10000000)
 
