@@ -302,13 +302,72 @@ Figure~\ref{fig:densenet} shows the performance of our modified \emph{DenseNet} 
 
 \subsection{Success Cases}
 \subsection{Failures}
+In fact, some of the dog images of different classes within the dataset have almost the "\emph{same}" appearance, even a human without specifiied knowledge of the thoes dogs cannot discern between them. This, however, is the major cause of our deep network making mistakes. 
+Typically, under such cases, the outputs of the final layer of our network tend vote for  multi-classes with almost equal scores. This is the resson why the top-$1$ result is much low than top-$2$, $3$, $\cdots$. 
+Figure~\ref{fig:failures}
+
+\begin{figure}
+	\centering
+	\label{fig:failures}
+	\begin{subfigure}{0.32\linewidth}
+		\centering
+		\includegraphics[width=\linewidth]{pics/f1}
+		\caption{ }
+		\emph{label}: Bernese Mountain Dog \\ \emph{predict}: EntleBucher
+		\label{fig:f1}
+	\end{subfigure}
+	\begin{subfigure}{0.32\linewidth}
+		\centering
+		\includegraphics[width=\linewidth]{pics/d1}
+		\caption{ }
+		\emph{label}: Samoye \\ \emph{predict}: Japanese Spytz
+		\label{fig:d1}
+	\end{subfigure}  
+	\begin{subfigure}{0.32\linewidth}
+		\centering
+		\includegraphics[width=\linewidth]{pics/s1}
+		\caption{}
+		\emph{label}: Chihuahua \\ \emph{predict}: Minlature Pinscher
+		\label{fig:s1}
+	\end{subfigure} 
+	
+	\begin{subfigure}{0.32\linewidth}
+		\centering
+		\includegraphics[width=\linewidth]{pics/f2}
+		\caption{}
+		\emph{label}: EntleBucher \newline \emph{predict}: Bernese Mountain Dog
+		\label{fig:f2}
+	\end{subfigure} 
+	\begin{subfigure}{0.32\linewidth}
+		\centering
+		\includegraphics[width=\linewidth]{pics/d2}
+		\caption{}
+		\emph{label}: Japanese Spytz \\ \emph{predict}: Samoye 
+		\label{fig:d2}
+	\end{subfigure} 
+	\begin{subfigure}{0.32\linewidth}
+		\centering
+		\includegraphics[width=\linewidth]{pics/s2}
+		\caption{}
+		\emph{label}:  Minlature Pinsche \\  \emph{predict}: Chihuahuar
+		\label{fig:s2}
+	\end{subfigure} 
+	
+	\caption{Examples of Failure Pairs shown in Columns.}
+\end{figure}
+
 
 \newpage
 \section{Discussion}
 
 \subsection{Inference}
+Before we implement the VGG19 model, Densenet121 model and InceptionV3 model, we have a approximate estimation of the performance of these three models. Taking into consideration the architecture of the three models, we predicted that Densenet121 had the best performance and VGG model might behave worse than the other two models. 
 \subsection{Conclusion}
+From Fig~\ref{fig:res} we can draw a conclusion that in naive conditions (Fig.\ref{fig:res} a), the VGG19 model has the lowest accuracy compared with the other two models. And after we change the last layer of the three models by a classifier with 120 classifications, the order of the accuracy remains the same. To be detail, DenseNet121 has the best performance, InceptionV3 just similar to DenseNet121 and VGG19 behaves worset in the three models. The results of the experiment just proved what we have predicted before we implemented the project.
+
+We can also notice from the pictures $(b)(c)(d)$ of Fig.\ref{fig:res}. that after we change the classifier and fine tune the last few layers, the performance of each model increases to some extent. This is because that the model is more specialized in dogs' breeds classification and therefore, it will have better performance than the more generalized one. 
 \subsection{Learning}
+During the process of doing project, we have learnt much that we can never learn from books. Before we did the project, we just had an abstract concept of what machine learning is doing and why it was so powerful. We looked forward to put what we have learnt into practice and the project was just a good opportunity. We learnt much about TensorFlow, Keras and many other packages that can greatly improve the efficiency of establishing a convolutional neural network. We also learnt how to designed a classifer. And the most important thing is that we had a deeper understanding of the architecture of different models. We learnt step by step and found that the world of machine learning is so interesting, so powerful that we are willing to discover the fields of machine learning in the future.
 \subsection{Challenges}
 For the purpose of classifying the breed of dogs properly, several challenges exist to be solved: 
 \begin{itemize}
@@ -316,8 +375,9 @@ For the purpose of classifying the breed of dogs properly, several challenges ex
 	\item[2] some breeds of dogs have very similar appearance, such as Samoye and Japanese Spitz, Bichon Frise and Teddy dog, Chihuahua and Minlature Pinscher, etc. Some of these dogs are even too similar for human beings to distinguish from one another. Therefore, how to accurately classify these similar dogs is a big challenge; 
 	\item[3] the third lies in the fact that we only have access to limited number of training images per class, which means we need to make the best use of the images to extract the features of different kinds of dogs. Therefore, we need to find a good way to process the original images to get as much information as possible. 
 \end{itemize}
-\subsection{Feture Work}
-
+\subsection{Future Work}
+In this project, we have tried three different models and evaluated their performance on the data set, from which we have the result of which model is good at recognizing different kinds of dogs and which is not. However, there are still many things that we can do in the future to improve the efficiency and accuracy of classifing dogs. The first thing we can do in the future is that we can combine the prediction result of the three models together and give out an 'mean' prediction. Since different models may extract different features of the same image, we can choose the best result by 'majority rule' or just choose the classification with the largest probability. 
+Another thing we can do is to collect more images of dogs to enlarge the training set. Since the number of training data is limited, the accuracy of all three models are not very satisfing. With more data, we are sure we can improve the accuracy much more.
 \section{Appendix}
 
 
