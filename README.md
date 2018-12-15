@@ -12,8 +12,12 @@ Keras         version: 2.1.6-tf
 
 Run Time
 ===================
+pip install --uesr tensorflow
+
 ./launch-tf-gpu.sh 
+
 or
+
 ./launch-pytorch.sh
 
 Code Organization
