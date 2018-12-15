@@ -1,4 +1,4 @@
-# ECE285_FInal
+# ECE285_Final
 
 Description
 ===================
