@@ -254,7 +254,6 @@ Table~\ref{tab:vgg19} described the details of our modified \emph{VGG19} network
 
 \begin{figure}[htb]
 	\centering
-	\label{fig:res}
 	\begin{subfigure}{0.48\linewidth}
 		\centering
 		\includegraphics[width=\linewidth]{pics/Model_naive}
@@ -279,7 +278,7 @@ Table~\ref{tab:vgg19} described the details of our modified \emph{VGG19} network
 		\caption{Results of \emph{DenseNet}}
 		\label{fig:densenet}
 	\end{subfigure} 
-	
+	\label{fig:ress}
 	\caption{Results of Top-$k$ Accuracy Verses $k$ index}
 \end{figure}
 
@@ -363,9 +362,9 @@ Figure~\ref{fig:failures}
 \subsection{Inference}
 Before we implement the VGG19 model, Densenet121 model and InceptionV3 model, we have a approximate estimation of the performance of these three models. Taking into consideration the architecture of the three models, we predicted that Densenet121 had the best performance and VGG model might behave worse than the other two models. 
 \subsection{Conclusion}
-From Fig~\ref{fig:res} we can draw a conclusion that in naive conditions (Fig.\ref{fig:res} a), the VGG19 model has the lowest accuracy compared with the other two models. And after we change the last layer of the three models by a classifier with 120 classifications, the order of the accuracy remains the same. To be detail, DenseNet121 has the best performance, InceptionV3 just similar to DenseNet121 and VGG19 behaves worset in the three models. The results of the experiment just proved what we have predicted before we implemented the project.
+From Fig~\ref{fig:ress} we can draw a conclusion that in naive conditions (Figure~\ref{fig:all3}), the VGG19 model has the lowest accuracy compared with the other two models. And after we change the last layer of the three models by a classifier with 120 classifications, the order of the accuracy remains the same. To be detail, DenseNet121 has the best performance, InceptionV3 just similar to DenseNet121 and VGG19 behaves worset in the three models. The results of the experiment just proved what we have predicted before we implemented the project.
 
-We can also notice from the pictures $(b)(c)(d)$ of Fig.\ref{fig:res}. that after we change the classifier and fine tune the last few layers, the performance of each model increases to some extent. This is because that the model is more specialized in dogs' breeds classification and therefore, it will have better performance than the more generalized one. 
+We can also notice from the pictures Figure~\ref{fig:vgg19}, \ref{fig:incetionp} and \ref{fig:densenet}. that after we change the classifier and fine tune the last few layers, the performance of each model increases to some extent. This is because that the model is more specialized in dogs' breeds classification and therefore, it will have better performance than the more generalized one. 
 \subsection{Learning}
 During the process of doing project, we have learnt much that we can never learn from books. Before we did the project, we just had an abstract concept of what machine learning is doing and why it was so powerful. We looked forward to put what we have learnt into practice and the project was just a good opportunity. We learnt much about TensorFlow, Keras and many other packages that can greatly improve the efficiency of establishing a convolutional neural network. We also learnt how to designed a classifer. And the most important thing is that we had a deeper understanding of the architecture of different models. We learnt step by step and found that the world of machine learning is so interesting, so powerful that we are willing to discover the fields of machine learning in the future.
 \subsection{Challenges}
