@@ -12,7 +12,9 @@ Keras         version: 2.1.6-tf
 
 Run Time
 ===================
-./launch-tf-gpu.sh
+./launch-tf-gpu.sh 
+or
+./launch-pytorch.sh
 
 Code Organization
 ===================
