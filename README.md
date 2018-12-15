@@ -6,10 +6,13 @@ In this project, we achieve classification of dog breeds from Stanford Dog Datas
 
 Requirements
 ===================
-TensorFlow version: 1.12.0
+TensorFlow    version: 1.12.0
 
-Keras      version: 2.1.6-tf
+Keras         version: 2.1.6-tf
 
+Run Time
+===================
+./launch-tf-gpu.sh
 
 Code Organization
 ===================
