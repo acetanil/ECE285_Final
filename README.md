@@ -14,11 +14,17 @@ Code Organization
 ===================
 
 src/Demo.ipynb                    -- Run a demo of our code
+
 src/evaluate_naive.ipynb          -- Run the naive conditions of inceptionv3, VGG and Densenet121
+
 src/inceptionv3.ipynb             -- Train and fine tune the inceptionV3 model and evaluate its performance
+
 src/main.ipynb                    -- compare the performance of different loss functino and use the most proper one
+
 src/prep.ipynb                    -- prep for the data
+
 src/VGG.ipynb                     -- Train and fine tune the VGG model and evaluate its performance
+
 src/Densenet121.ipynb             -- Train and fine tune the Densenet121 model and evaluate its performance
 
 Data set
